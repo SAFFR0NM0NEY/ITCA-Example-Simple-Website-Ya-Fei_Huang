@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Load products from XML
   fetch("data/products.xml")
     .then(response => response.text())
     .then(data => {
@@ -25,58 +26,15 @@ document.addEventListener("DOMContentLoaded", function () {
       const list = document.getElementById("product-list");
       if (list) {
         list.innerHTML = output;
-      } else {
-        console.error("product-list container not found");
       }
     })
     .catch(error => {
       console.error("Fetch error:", error);
     });
+
+  // ✅ Attach the Clear Cart Button event *AFTER* the DOM is fully ready
+  const clearCartBtn = document.getElementById("clear-cart");
+  if (clearCartBtn) {
+    clearCartBtn.addEventListener("click", clearCart);
+  }
 });
-
-function addToCart(name, price) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push({ name, price });
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert(`${name} added to cart`);
-}
-
-function removeFromCart(index) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.splice(index, 1); // Remove the item at the specified index
-  localStorage.setItem("cart", JSON.stringify(cart));
-  displayCart(); // Update cart display
-}
-
-function clearCart() {
-  localStorage.removeItem("cart");
-  alert("Cart cleared!");
-  location.reload(); // reloads the page to reflect the empty cart
-}
-
-function displayCart() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const cartList = document.getElementById("cart-list");
-  const totalPriceElement = document.getElementById("total-price");
-  
-  cartList.innerHTML = ""; // Clear previous cart items
-  let total = 0;
-
-  cart.forEach((item, index) => {
-    total += item.price; // Accumulate the total price
-    cartList.innerHTML += `
-      <div>
-        <span>${item.name} - R${item.price.toFixed(2)}</span>
-        <button onclick="removeFromCart(${index})">Remove</button>
-      </div>`;
-  });
-
-  // Show total price
-  totalPriceElement.innerText = `Total Price: R${total.toFixed(2)}`;
-}
-
-// Clear cart button
-const clearCartBtn = document.getElementById("clear-cart");
-if (clearCartBtn) {
-  clearCartBtn.addEventListener("click", clearCart);
-}
