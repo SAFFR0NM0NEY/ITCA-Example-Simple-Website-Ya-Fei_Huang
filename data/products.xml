@@ -1,0 +1,52 @@
+<products>
+  <product>
+  <id>1</id>
+  <name>Purple Wireless Mouse</name>
+  <price>152.99</price>
+  <image>images/mouse.jpg</image>
+  </product>
+  <product>
+  <id>2</id>
+  <name>Pink Keyboard</name>
+  <price>299.99</price>
+  <image>images/keyboard.webp</image>
+  </product>
+  <product>
+  <id>3</id>
+  <name>Purple Keyboard Protecter</name>
+  <price>99.99</price>
+  <image>images/keyboardprotecter.jpg</image>
+  </product>
+  <product>
+  <id>4</id>
+  <name>Power bank</name>
+  <price>392.99</price>
+  <image>images/powerbank.jpg</image>
+  </product>
+  <product>
+  <id>5</id>
+  <name>Blue Speaker with bluetooth</name>
+  <price>399.99</price>
+  <image>images/speaker.jpg</image>
+  </product>
+  <product>
+  <product>
+  <id>6</id>
+  <name>Canon PowerShot SX740 HS Lite Edition Compact Camera with 40x Superzoom</name>
+  <price>8899.99</price>
+  <image>images/camera.jpeg</image>
+  </product>
+  <id>7</id>
+  <name>JBL TUNE 720BT Over-Ear Wireless Headphones, Sound Isolation, Volume Control, 
+   Long Battery Life, USB Charging, 500mAh, 2.5W-5W</name>
+   <price>1289.99</price>
+   <image>images/headphone.jpg</image>
+   </product>
+   <product>
+   <id>8</id>
+   <name>Smartwatch for Men Women, Alexa Built-in, 1.8" Fitness Tracker, IP68 Waterproof Smartwatch for Android &
+    iPhone with Bluetooth Call (Answer/Make), Heart Rate/SpO2/Sleep Monitor/Pedometer, Purple</name>
+    <price>1139.99</price>
+    <image>images/smartwatch.jpeg</image>
+    </product>
+</products>
