@@ -75,4 +75,7 @@ function displayCart() {
 }
 
 // Clear cart button
-document.getElementById("clear-cart").addEventListener("click", clearCart);
+const clearCartBtn = document.getElementById("clear-cart");
+if (clearCartBtn) {
+  clearCartBtn.addEventListener("click", clearCart);
+}
