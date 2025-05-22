@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
       let output = "";
       for (let product of products) {
         const name = product.getElementsByTagName("name")[0].textContent;
-        const safeName = name.replace(/'/g, "\\'").replace(/"/g, '\\"');
-        const price = product.getElementsByTagName("price")[0].textContent;
+        const safeName = name.replace(/'/g, "\'").replace(/"/g, '\"');
+        const price = parseFloat(product.getElementsByTagName("price")[0].textContent);
         const image = product.getElementsByTagName("image")[0].textContent;
 
         output += `
@@ -28,6 +28,15 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         console.error("product-list container not found");
       }
+
+      const cartContainer = document.getElementById("cart-items");
+      if (cartContainer) {
+        displayCart();
+        const clearBtn = document.getElementById("clear-cart");
+        if (clearBtn) {
+          clearBtn.addEventListener("click", clearCart);
+        }
+      }
     })
     .catch(error => {
       console.error("Fetch error:", error);
@@ -43,36 +52,35 @@ function addToCart(name, price) {
 
 function removeFromCart(index) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.splice(index, 1); // Remove the item at the specified index
+  cart.splice(index, 1);
   localStorage.setItem("cart", JSON.stringify(cart));
-  displayCart(); // Update cart display
+  displayCart();
 }
 
 function clearCart() {
-  localStorage.removeItem("cart"); // Clear all items from the cart
-  displayCart(); // Update cart display
+  localStorage.removeItem("cart");
+  displayCart();
 }
 
 function displayCart() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const cartList = document.getElementById("cart-list");
-  const totalPriceElement = document.getElementById("total-price");
-  
-  cartList.innerHTML = ""; // Clear previous cart items
+  const cartContainer = document.getElementById("cart-items");
+
+  let html = "<h2>Your Cart</h2>";
   let total = 0;
 
-  cart.forEach((item, index) => {
-    total += item.price; // Accumulate the total price
-    cartList.innerHTML += `
-      <div>
-        <span>${item.name} - R${item.price.toFixed(2)}</span>
-        <button onclick="removeFromCart(${index})">Remove</button>
-      </div>`;
-  });
+  if (cart.length === 0) {
+    html += "<p>Your cart is empty.</p>";
+  } else {
+    cart.forEach((item, index) => {
+      const price = parseFloat(item.price);
+      html += `<p>${item.name} - R${price.toFixed(2)} <button onclick="removeFromCart(${index})">Remove</button></p>`;
+      total += price;
+    });
+    html += `<h3>Total: R${total.toFixed(2)}</h3>`;
+  }
 
-  // Show total price
-  totalPriceElement.innerText = `Total Price: R${total.toFixed(2)}`;
+  html += '<button id="clear-cart">Clear Cart</button>';
+  cartContainer.innerHTML = html;
+  document.getElementById("clear-cart").addEventListener("click", clearCart);
 }
-
-// Clear cart button
-document.getElementById("clear-cart").addEventListener("click", clearCart);

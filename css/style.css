@@ -4,14 +4,12 @@ body {
   margin: 0;
   padding: 0;
 }
-
 header, footer {
   background: rgb(227, 206, 221);
   color: rgb(118, 17, 173);
   text-align: center;
   padding: 1em;
 }
-
 nav a {
   margin: 0 10px;
   color: rgb(118, 17, 173);
