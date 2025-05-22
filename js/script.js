@@ -49,8 +49,9 @@ function removeFromCart(index) {
 }
 
 function clearCart() {
-  localStorage.removeItem("cart"); // Clear all items from the cart
-  displayCart(); // Update cart display
+  localStorage.removeItem("cart");
+  alert("Cart cleared!");
+  location.reload(); // reloads the page to reflect the empty cart
 }
 
 function displayCart() {
